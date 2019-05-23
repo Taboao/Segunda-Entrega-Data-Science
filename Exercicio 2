@@ -1,0 +1,17 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import matplotlib.dates as mdates
+import numpy as np
+%matplotlib inline
+
+df = pd.read_csv("train.csv")
+
+medias_lojas = df[['Store', 'Weekly_Sales']].groupby(by='Store', as_index=False).mean()
+maiores_medias = medias_lojas.sort_values(by='Weekly_Sales',ascending=False).head(10)
+
+plt.bar(np.arange(10), maiores_medias['Weekly_Sales'])
+plt.xticks(np.arange(10), maiores_medias['Store'])
+plt.xlabel("Lojas")
+plt.ylabel("Médias das Vendas")
+plt.title("As 10 Lojas com Maiores Volumes de Vendas Médias")
+plt.show()
