@@ -1,3 +1,7 @@
+#Como é uma serie temporal, eu julguei que o melhor tipod e gráfico seria o de linhas
+#pois, fica mais vizual identificar as variações das vendas, além de identificar
+#padrões como foi o caso de final de ano, onde as vendas cresceram muito em ambos os anos. 
+
 import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.dates as mdates
