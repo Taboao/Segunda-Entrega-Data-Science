@@ -1,0 +1,17 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import matplotlib.dates as mdates
+import numpy as np
+%matplotlib inline
+
+
+df = pd.read_csv("train.csv")
+
+filtro = df[['Date','Weekly_Sales']].groupby("Date").mean()
+
+plt.plot(filtro2)
+plt.xticks(np.arange(0, 143, step=13),rotation=90)
+plt.xlabel("Semanas")
+plt.ylabel("Vendas")
+plt.title("Médias semanais de todas ao Lojas")
+plt.show()
