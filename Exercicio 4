@@ -1,0 +1,39 @@
+#Resolvir plotar o grafico de linhas, pois com os dois, com feriado e sem feriado, sobreposto, 
+#fica evidente que a semana que tem o feriado de natal puxa positivamente a média das vendas pra cima, 
+#A mediana também ficou maior quando tem feirado,isso só reafirma que tem os feriados acabam variando mais
+#positivamente nas vendas. 
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import matplotlib.dates as mdates
+import numpy as np
+%matplotlib inline
+
+
+df = pd.read_csv("train.csv")
+
+
+media_sem_feriado = df[df['IsHoliday']==False]['Weekly_Sales'].mean()
+
+mediana_sem_feriado = df[df['IsHoliday']==False]['Weekly_Sales'].median()
+
+media_com_feriado = df['Weekly_Sales'].mean()
+
+mediana_com_feriado = df['Weekly_Sales'].median()
+
+filtro = df[['Date','Weekly_Sales']].groupby("Date").mean()
+filtro2 = df[df['IsHoliday']==False][['Date','Weekly_Sales']].groupby("Date").mean()
+
+plt.plot(filtro,'k:',color='blue',label='Com Feriado')
+plt.plot(filtro2,'k-.',color='red',label = 'Sem Feriado')
+plt.xticks(np.arange(0, 143, step=13),rotation=90)
+plt.xlabel("Semanas")
+plt.ylabel("Vendas")
+plt.legend()
+plt.title("Médias semanais de todas ao Lojas com e sem feriado")
+plt.grid()
+plt.show()
+
+print("Foi realizado a média e a mediana das semanas com e sem feriado.")
+print("Assim a média com feriado ficou {} e a média sem feriado ficou {}".format(media_com_feriado, media_sem_feriado))
+print("A mediana com feriado ficou {} e a mediana sem feriado ficou {}". format(mediana_com_feriado, mediana_sem_feriado))
